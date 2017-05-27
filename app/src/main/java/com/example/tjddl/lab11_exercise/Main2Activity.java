@@ -1,12 +1,15 @@
 package com.example.tjddl.lab11_exercise;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
     static int count = 0;
@@ -77,13 +80,19 @@ public class Main2Activity extends AppCompatActivity {
         if (v.getId() == R.id.imageView) {
             if(count ==0) {
                 task1 = new myTask();
-                if (et.getText().toString() != null)
-                    task1.execute(Integer.parseInt(et.getText().toString()));
+                String s = et.getText().toString();
+
+                if (!TextUtils.isEmpty(s)) {
+                    task1.execute(Integer.parseInt(s));
+
+                }
+                else return;
                 count++;
             }
             else if(count==1){
                 task1.cancel(true);
                 tv.setText(menu+" 선택("+sec_count+"초)");
+                tv.setTextColor(Color.BLUE);
                 count++;
             }
         }
